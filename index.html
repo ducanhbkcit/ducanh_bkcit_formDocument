@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký Tài liệu AI - Hệ thống RISEN-X</title>
+    <style>
+        :root { 
+            --primary: #1a365d; 
+            --secondary: #2b6cb0;
+            --accent: #38a169;
+            --bg-gradient: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+            --shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background: var(--bg-gradient); 
+            margin: 0; padding: 40px 15px;
+            display: flex; justify-content: center;
+        }
+
+        .form-card { 
+            width: 100%; max-width: 750px; 
+            background: #ffffff; padding: 40px; 
+            border-radius: 20px; box-shadow: var(--shadow);
+        }
+
+        h2 { 
+            text-align: center; color: var(--primary); 
+            text-transform: uppercase; font-size: 22px;
+            margin-bottom: 30px; border-bottom: 3px solid var(--secondary);
+            padding-bottom: 15px;
+        }
+
+        .form-group { margin-bottom: 22px; }
+        
+        label { font-weight: 700; display: block; margin-bottom: 8px; color: #2d3748; }
+        .req { color: #e53e3e; }
+        
+        input[type="text"], input[type="number"], input[type="email"] { 
+            width: 100%; padding: 14px; border: 1.5px solid #cbd5e0; 
+            border-radius: 10px; box-sizing: border-box; font-size: 16px;
+            transition: 0.3s; background: #f7fafc;
+        }
+        
+        input:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2); background: #fff; }
+
+        .doc-card { 
+            background: #f8fafc; border: 2px solid #edf2f7; padding: 18px; 
+            margin-bottom: 12px; border-radius: 12px; cursor: pointer; 
+            transition: 0.3s; display: block;
+        }
+        
+        .doc-card:hover { border-color: var(--secondary); background: #ebf8ff; }
+        
+        .doc-card input[type="radio"] { margin-right: 12px; transform: scale(1.3); accent-color: var(--secondary); }
+
+        .qr-area { display: none; text-align: center; margin-top: 20px; padding: 15px; border-top: 1px dashed #cbd5e0; animation: slideDown 0.4s ease; }
+        
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .qr-img { max-width: 260px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 4px solid #fff; }
+
+        .legal-note { 
+            background: #fffaf0; border-left: 5px solid #ed8936; 
+            padding: 20px; margin: 30px 0; border-radius: 4px;
+            font-size: 14.5px; color: #4a5568; line-height: 1.8; text-align: justify;
+        }
+
+        .checkbox-container { background: #f0fff4; padding: 15px; border-radius: 10px; border: 1px solid #c6f6d5; display: flex; align-items: center; cursor: pointer; }
+        .checkbox-container input { width: 20px; height: 20px; margin-right: 12px; cursor: pointer; }
+
+        .contact-info { text-align: center; margin-top: 30px; padding: 20px; background: #edf2f7; border-radius: 15px; }
+        .qr-flex { display: flex; justify-content: center; gap: 30px; margin-top: 15px; }
+        .qr-flex div img { width: 130px; border-radius: 10px; }
+
+        .btn-submit { 
+            width: 100%; padding: 18px; font-size: 18px; font-weight: 800; 
+            color: #fff; background: var(--primary); border: none; 
+            border-radius: 12px; cursor: pointer; transition: 0.3s; 
+            text-transform: uppercase; margin-top: 20px; letter-spacing: 1px;
+        }
+        
+        .btn-submit:hover { background: var(--secondary); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+        #status { display: none; text-align: center; font-weight: bold; margin-top: 15px; padding: 10px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="form-card">
+    <h2>Hệ thống đăng ký Trợ lý AI - Đức Anh</h2>
+    
+    <form id="aiForm">
+        <div class="form-group">
+            <label>1. Họ và Tên / Infor <span class="req">*</span></label>
+            <input type="text" id="name" required oninput="properCase(this)" placeholder="Tự động viết hoa chữ cái đầu">
+        </div>
+        
+        <div class="form-group">
+            <label>2. Địa chỉ / Nơi công tác <span class="req">*</span></label>
+            <input type="text" id="address" required placeholder="Ghi rõ thông tin nhận tài liệu - Chưa bao gồm phí ship">
+        </div>
+
+        <div class="form-group">
+            <label>3. Lĩnh vực công tác / Quan tâm <span class="req">*</span></label>
+            <input type="text" id="field" required placeholder="Ví dụ: Tư pháp, Địa chính, Kinh tế...">
+        </div>
+
+        <div class="form-group">
+            <label>4. Số điện thoại (Zalo) <span class="req">*</span></label>
+            <input type="number" id="phone" required placeholder="Nhập số điện thoại">
+        </div>
+
+        <div class="form-group">
+            <label>5. Email <span class="req">*</span></label>
+            <input type="email" id="email" required placeholder="Để nhận thông báo cập nhật tài liệu">
+        </div>
+
+        <label style="margin-top: 30px;">6. Chọn tài liệu đăng ký nghiên cứu <span class="req">*</span></label>
+        
+        <label class="doc-card">
+            <input type="radio" name="doc" value="AI Văn phòng UBND" onchange="toggleQR('qr-vp')" required>
+            Trợ lý AI của CV Pháp lý Văn phòng UBND Xã/Phường
+            <div id="qr-vp" class="qr-area"><img src="VP.jpg" class="qr-img"></div>
+        </label>
+
+        <label class="doc-card">
+            <input type="radio" name="doc" value="AI Phòng Kinh tế" onchange="toggleQR('qr-pkt')">
+            Trợ lý AI Chuyên viên Phòng Kinh tế UBND Xã/Phường
+            <div id="qr-pkt" class="qr-area"><img src="PKT.jpg" class="qr-img"></div>
+        </label>
+
+        <label class="doc-card">
+            <input type="radio" name="doc" value="Master AI Pro 2026" onchange="toggleQR('qr-ai')">
+            Làm chủ Trợ lý AI chuyên nghiệp (Phát hành 03/2026)
+            <div id="qr-ai" class="qr-area"><img src="AI.jpg" class="qr-img"></div>
+        </label>
+
+        <div class="legal-note">
+            <strong>Thông điệp từ Đức Anh:</strong><br>
+            Đây là tài liệu do Đức Anh tự nghiên cứu và phát triển. Với nhiệt huyết của tuổi trẻ, tôi sẵn sàng chia sẻ để xây dựng cộng đồng cùng phát triển. Xuất phát từ thực tiễn thực hiện chính quyền 02 cấp từ ngày 01/07/2025, áp lực đối với chuyên viên cấp xã là vô cùng lớn khi các văn bản quy phạm pháp luật thay đổi liên tục. Do đó, việc tận dụng AI để tối ưu hóa công việc là giải pháp cấp thiết mà tôi muốn hướng dẫn đến tận tay các bạn.
+        </div>
+
+        <label class="checkbox-container">
+            <input type="checkbox" required>
+            <b style="color: #276749;">Tôi đã đọc, hiểu rõ và đồng ý với các nội dung trên.</b>
+        </label>
+
+        <div class="contact-info">
+            <b>Đức Anh: 0901.951.525 / 0859.749.525</b>
+            <div class="qr-flex">
+                <div><img src="Zalo.jpg"><br><small>Zalo</small></div>
+                <div><img src="Team.jpg"><br><small>Nhóm Hỗ trợ</small></div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">Xác nhận đăng ký ngay</button>
+        <div id="status"></div>
+    </form>
+</div>
+
+<script>
+    // Tự động viết hoa chữ cái đầu (VD: le duc anh -> Le Duc Anh)
+    function properCase(input) {
+        input.value = input.value.toLowerCase().replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+    }
+
+    // Hiển thị QR tương ứng
+    function toggleQR(id) {
+        document.querySelectorAll('.qr-area').forEach(el => el.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+
+    // Gửi dữ liệu về Google Sheets
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwXpQ0gKowWe2Mzk3qdv9cmcH3RvJvCuDVAyyRbEJJmhubPD23Zv-q0i8WflEQAm8o/exec';
+    const form = document.getElementById('aiForm');
+    const btn = document.getElementById('submitBtn');
+    const status = document.getElementById('status');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.innerText = 'Đang xử lý dữ liệu...';
+        status.style.display = 'block';
+        status.innerText = '⏳ Đang truyền dữ liệu lên hệ thống RISEN-X...';
+        status.style.color = '#2b6cb0';
+
+        const data = {
+            name: document.getElementById('name').value,
+            address: document.getElementById('address').value,
+            field: document.getElementById('field').value,
+            phone: document.getElementById('phone').value,
+            email: document.getElementById('email').value,
+            document: document.querySelector('input[name="doc"]:checked').value
+        };
+
+        fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(() => {
+            status.innerText = '✅ Đăng ký thành công! Đức Anh sẽ liên hệ hỗ trợ bạn sớm nhất.';
+            status.style.color = '#2f855a';
+            form.reset();
+            document.querySelectorAll('.qr-area').forEach(el => el.style.display = 'none');
+            btn.disabled = false;
+            btn.innerText = 'Xác nhận đăng ký ngay';
+        })
+        .catch(error => {
+            status.innerText = '❌ Lỗi kết nối. Vui lòng kiểm tra lại mạng.';
+            status.style.color = '#c53030';
+            btn.disabled = false;
+            console.error('Error!', error.message);
+        });
+    });
+</script>
+
+</body>
+</html>
